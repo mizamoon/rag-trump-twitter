@@ -8,9 +8,17 @@ from config import TOP_K_DEFAULT
 from rag.generator import generate_answer
 from rag.retriever import retrieve_tweets
 
+from pathlib import Path
+import subprocess
+
 MIN_DATE = date(2009, 5, 4)
 MAX_DATE = date(2026, 1, 8)
 
+INDEX_PATH = Path("vectorstore/hybrid_index")
+
+if not INDEX_PATH.exists():
+    print("Index not found. Building index...")
+    subprocess.run(["python", "build_index.py"], check=True)
 
 def fmt_date(d: date | None) -> str:
     if d is None:
