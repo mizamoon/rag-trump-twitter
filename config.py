@@ -1,0 +1,58 @@
+from pathlib import Path
+
+from dotenv import load_dotenv
+
+load_dotenv()
+
+# Project paths
+PROJECT_ROOT = Path(__file__).resolve().parent
+
+INPUT_PATH = PROJECT_ROOT / "data" / "processed" / "trump_tweets_clean.csv"
+
+INDEX_PATH = PROJECT_ROOT / "vectorstore" / "hybrid_index"
+DOCSTORE_PATH = INDEX_PATH / "documents.jsonl"
+DENSE_MATRIX_PATH = INDEX_PATH / "dense_vectors.npy"
+SPARSE_WEIGHTS_PATH = INDEX_PATH / "sparse_weights.jsonl"
+INDEX_META_PATH = INDEX_PATH / "index_meta.json"
+TERM_VOCAB_PATH = INDEX_PATH / "term_vocab.json"
+TERM_EMBEDDINGS_PATH = INDEX_PATH / "term_embeddings.npy"
+
+# Models
+EMBED_MODEL = "BAAI/bge-m3"
+RERANK_MODEL = "cross-encoder/ms-marco-MiniLM-L-6-v2"
+GEN_MODEL = "arcee-ai/trinity-large-preview:free"
+
+# Embedding / indexing
+EMBED_BATCH_SIZE = 64
+NORMALIZE_EMBEDDINGS = True
+
+BGE_M3_USE_FP16 = True
+BGE_M3_QUERY_MAX_LENGTH = 128
+BGE_M3_PASSAGE_MAX_LENGTH = 512
+
+# Retrieval
+TOP_K_DEFAULT = 8
+DENSE_TOP_N = 160
+BM25_TOP_N = 180
+BGE_SPARSE_TOP_N = 180
+FUSION_TOP_N = 120
+RERANK_TOP_N = 80
+RERANK_BATCH_SIZE = 64
+RRF_K = 60
+MAX_CONTEXT_CHARS = 1000
+DENSE_RRF_WEIGHT = 1.00
+BM25_RRF_WEIGHT = 0.75
+BGE_SPARSE_RRF_WEIGHT = 0.95
+ORIGINAL_QUERY_WEIGHT = 1.00
+LOWER_QUERY_WEIGHT = 0.92
+KEYWORD_QUERY_WEIGHT = 0.72
+ENABLE_EMBEDDING_QUERY_EXPANSION = True
+TERM_VOCAB_MAX_TERMS = 15000
+TERM_MIN_DOC_FREQ = 5
+TERM_MAX_DOC_FREQ_RATIO = 0.15
+TERM_EXPANSION_TOP_K = 4
+TERM_EXPANSION_MAX_VARIANTS = 8
+ENABLE_NEAR_DUPLICATE_SUPPRESSION = True
+DEDUPE_MAX_HAMMING = 3
+DEDUPE_MIN_JACCARD = 0.88
+DEDUP_NGRAM_SIZE = 3

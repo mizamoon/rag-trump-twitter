@@ -1,0 +1,20 @@
+[project]
+name = "rag-trump"
+version = "0.1.0"
+description = "Trump tweets RAG"
+readme = "README.md"
+requires-python = ">=3.11"
+
+dependencies = [
+    "pandas>=2.2",
+    "streamlit>=1.35",
+    "watchdog>=3.0",
+    "rank-bm25>=0.2.2",
+
+    "FlagEmbedding==1.2.10",
+    "sentence-transformers==2.6.1",
+    "transformers==4.39.3",
+
+    "openai>=1.30",
+    "python-dotenv>=1.0"
+]
