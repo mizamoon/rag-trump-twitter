@@ -6,15 +6,20 @@ readme = "README.md"
 requires-python = ">=3.11"
 
 dependencies = [
+    "numpy>=2.0",
     "pandas>=2.2",
+
     "streamlit>=1.35",
     "watchdog>=3.0",
+
     "rank-bm25>=0.2.2",
 
     "FlagEmbedding==1.2.10",
     "sentence-transformers==2.6.1",
     "transformers==4.39.3",
 
-    "openai>=1.30",
-    "python-dotenv>=1.0"
+    "openai>=2.0",
+    "python-dotenv>=1.0",
+
+    "scikit-learn>=1.8"
 ]
