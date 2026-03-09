@@ -496,7 +496,7 @@ def inject_css() -> None:
     )
 
 
-st.set_page_config(page_title="Trump RAG", page_icon="🔎", layout="wide")
+st.set_page_config(page_title="Trump RAG", page_icon="🇺🇸", layout="wide")
 inject_css()
 
 if "result" not in st.session_state:
@@ -509,7 +509,7 @@ if "error" not in st.session_state:
 st.markdown(
     """
     <div class="hero">
-        <div class="hero-title">Trump Tweets Retrieval System</div>
+        <div class="hero-title">🧢🇺🇸 Trump Tweets Retrieval System</div>
         <p class="hero-sub">
             Hybrid Retrieval + Cross-Encoder Reranking Architecture
         </p>
