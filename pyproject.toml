@@ -13,7 +13,7 @@ dependencies = [
     "watchdog>=3.0",
 
     "rank-bm25>=0.2.2",
-
+    "huggingface_hub",
     "FlagEmbedding==1.2.10",
     "sentence-transformers==2.6.1",
     "transformers==4.39.3",

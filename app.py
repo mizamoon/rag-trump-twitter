@@ -1,24 +1,59 @@
 import math
 from datetime import date
+from pathlib import Path
 from typing import Iterable
 
 import streamlit as st
+from huggingface_hub import snapshot_download
 
 from config import TOP_K_DEFAULT
 from rag.generator import generate_answer
 from rag.retriever import retrieve_tweets
 
-from pathlib import Path
-import subprocess
 
 MIN_DATE = date(2009, 5, 4)
 MAX_DATE = date(2026, 1, 8)
 
+HF_REPO_ID = "mizamoon/rag-trump-index"
 INDEX_PATH = Path("vectorstore/hybrid_index")
+REQUIRED_FILES = [
+    "dense_vectors.npy",
+    "documents.jsonl",
+    "index_meta.json",
+    "sparse_weights.jsonl",
+    "term_embeddings.npy",
+    "term_vocab.json",
+]
 
-if not INDEX_PATH.exists():
-    print("Index not found. Building index...")
-    subprocess.run(["python", "build_index.py"], check=True)
+
+@st.cache_resource(show_spinner="Downloading vector index...")
+def ensure_index() -> str:
+    INDEX_PATH.mkdir(parents=True, exist_ok=True)
+
+    missing = [name for name in REQUIRED_FILES if not (INDEX_PATH / name).exists()]
+    if not missing:
+        return str(INDEX_PATH)
+
+    snapshot_download(
+        repo_id=HF_REPO_ID,
+        repo_type="dataset",
+        local_dir=str(INDEX_PATH),
+        allow_patterns=REQUIRED_FILES,
+        ignore_patterns=[".gitattributes"],
+    )
+
+    still_missing = [name for name in REQUIRED_FILES if not (INDEX_PATH / name).exists()]
+    if still_missing:
+        raise FileNotFoundError(
+            "Index download finished, but some files are still missing: "
+            + ", ".join(still_missing)
+        )
+
+    return str(INDEX_PATH)
+
+
+ensure_index()
+
 
 def fmt_date(d: date | None) -> str:
     if d is None:
