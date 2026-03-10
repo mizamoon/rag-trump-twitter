@@ -3,7 +3,7 @@
     HSE Research Seminar: AI and Data Analysis  
 Source: [Kaggle dataset](https://www.kaggle.com/datasets/datadrivendecision/trump-tweets-2009-2025/data)
 
-Twitter & Truth gSocial, 2009–2026
+Twitter & Truth Social, 2009–2026
 
 ![Обложка проекта](ux.png)
 
