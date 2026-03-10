@@ -1,13 +1,3 @@
----
-title: Trump Tweets RAG
-emoji: 🧢
-colorFrom: red
-colorTo: blue
-sdk: docker
-app_port: 7860
-pinned: false
----
-
 # RAG Trump Twitter Posts
 
     HSE Research Seminar: AI and Data Analysis  
